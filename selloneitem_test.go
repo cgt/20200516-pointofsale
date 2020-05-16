@@ -54,7 +54,10 @@ func TestSellOneItem(t *testing.T) {
 					"12345": "$6.78",
 					"11223": "$5.00",
 				},
-				nil,
+				map[string]int{
+					"12345": 678,
+					"11223": 500,
+				},
 			}
 
 			sale := &Sale{display, catalog}
