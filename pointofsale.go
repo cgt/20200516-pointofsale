@@ -15,9 +15,6 @@ func (s *Sale) OnBarcode(barcode string) {
 	if price, ok := s.pricesByBarcode[strings.TrimSpace(barcode)]; ok {
 		s.display.Display(price)
 	} else {
-		if false {
-		} else {
-			s.display.Display("product not found")
-		}
+		s.display.Display("product not found")
 	}
 }
