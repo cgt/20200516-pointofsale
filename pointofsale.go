@@ -22,7 +22,8 @@ func (s *Sale) OnBarcode(barcode string) {
 		s.display.Display("error: invalid barcode")
 		return
 	}
-	if false {
+	if price, ok := s.catalog.FormattedPrice(barcode); ok {
+		s.display.Display(price)
 	} else {
 		if price, ok := s.pricesByBarcode[barcode]; ok {
 			s.display.Display(price)
