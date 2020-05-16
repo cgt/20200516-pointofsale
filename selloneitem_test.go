@@ -29,7 +29,7 @@ func (s *Sale) OnBarcode(barcode string) {
 	if price, ok := pricesByBarcode[barcode]; ok {
 		s.display.Display(price)
 	} else {
-		if barcode == "12345\n" {
+		if false {
 			s.display.Display(pricesByBarcode[barcode])
 		} else if false {
 			s.display.Display(pricesByBarcode[barcode])
