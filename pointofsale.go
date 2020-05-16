@@ -41,8 +41,6 @@ func (s InMemoryCatalog) FormattedPrice(barcode string) (string, bool) {
 	if !ok {
 		priceInCents := 0
 		priceInCents, ok = s.pricesInCentsByBarcode[barcode]
-		_ = priceInCents
-		price = "$5.21"
 		price = fmt.Sprintf("$%v", float64(priceInCents)/100.0)
 	}
 	return price, ok
