@@ -2,13 +2,8 @@ package pointofsale
 
 import (
 	"github.com/stretchr/testify/assert"
-	"strings"
 	"testing"
 )
-
-type Display interface {
-	Display(text string)
-}
 
 type spyDisplay struct {
 	currentText string
@@ -16,27 +11,6 @@ type spyDisplay struct {
 
 func (d *spyDisplay) Display(text string) {
 	d.currentText = text
-}
-
-type Sale struct {
-	display         Display
-	pricesByBarcode map[string]string
-}
-
-func (s *Sale) OnBarcode(barcode string) {
-	pricesByBarcode := map[string]string{
-		"12345": "$6.78",
-		"11223": "$5.00",
-	}
-	if price, ok := s.pricesByBarcode[strings.TrimSpace(barcode)]; ok {
-		s.display.Display(price)
-	} else {
-		if price, ok := pricesByBarcode[strings.TrimSpace(barcode)]; ok {
-			s.display.Display(price)
-		} else {
-			s.display.Display("product not found")
-		}
-	}
 }
 
 func TestSellOneItem(t *testing.T) {
