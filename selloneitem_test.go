@@ -60,8 +60,9 @@ func TestSellOneItem(t *testing.T) {
 				"12345": "$6.78",
 				"11223": "$5.00",
 			}
+			catalog := stubCatalog(pricesByBarcode)
 
-			sale := &Sale{display, stubCatalog(pricesByBarcode)}
+			sale := &Sale{display, catalog}
 			sale.OnBarcode(tc.barcode)
 
 			assert.Equal(t, tc.expectedDisplayText, display.currentText)
