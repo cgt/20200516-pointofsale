@@ -52,7 +52,7 @@ func TestSellOneItem(t *testing.T) {
 			catalog := InMemoryCatalog{map[string]string{
 				"12345": "$6.78",
 				"11223": "$5.00",
-			}}
+			}, nil}
 
 			sale := &Sale{display, catalog}
 			sale.OnBarcode(tc.barcode)

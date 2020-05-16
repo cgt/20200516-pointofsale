@@ -30,6 +30,7 @@ func (s *Sale) OnBarcode(barcode string) {
 
 type InMemoryCatalog struct {
 	formattedPricesByBarcode map[string]string
+	pricesInCentsByBarcode   map[string]int
 }
 
 func (s InMemoryCatalog) FormattedPrice(barcode string) (string, bool) {
