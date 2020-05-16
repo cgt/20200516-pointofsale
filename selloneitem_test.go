@@ -22,8 +22,11 @@ type Sale struct {
 }
 
 func (s *Sale) OnBarcode(barcode string) {
+	pricesByBarcode := map[string]string{
+		"12345\n": "$6.78",
+	}
 	if barcode == "12345\n" {
-		s.display.Display("$6.78")
+		s.display.Display(pricesByBarcode[barcode])
 	} else if barcode == "11223\n" {
 		s.display.Display("$5.00")
 	} else {
