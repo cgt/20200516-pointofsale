@@ -54,4 +54,13 @@ func TestSellOneItem(t *testing.T) {
 
 		assert.Equal(t, "error: invalid barcode", display.currentText)
 	})
+
+	t.Run("blank barcode", func(t *testing.T) {
+		display := &spyDisplay{}
+
+		sale := &Sale{display, catalog}
+		sale.OnBarcode("\n")
+
+		assert.Equal(t, "error: invalid barcode", display.currentText)
+	})
 }

@@ -12,7 +12,7 @@ type Sale struct {
 }
 
 func (s *Sale) OnBarcode(barcode string) {
-	if barcode == "" {
+	if strings.TrimSpace(barcode) == "" {
 		s.display.Display("error: invalid barcode")
 		return
 	}
