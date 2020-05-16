@@ -19,7 +19,8 @@ func (d *spyDisplay) Display(text string) {
 }
 
 type Sale struct {
-	display Display
+	display         Display
+	pricesByBarcode map[string]string
 }
 
 func (s *Sale) OnBarcode(barcode string) {
@@ -38,7 +39,7 @@ func TestSellOneItem(t *testing.T) {
 	t.Run("product found", func(t *testing.T) {
 		display := &spyDisplay{}
 
-		sale := &Sale{display}
+		sale := &Sale{display, nil}
 		sale.OnBarcode("12345\n")
 
 		assert.Equal(t, "$6.78", display.currentText)
@@ -47,7 +48,7 @@ func TestSellOneItem(t *testing.T) {
 	t.Run("another product found", func(t *testing.T) {
 		display := &spyDisplay{}
 
-		sale := &Sale{display}
+		sale := &Sale{display, nil}
 		sale.OnBarcode("11223\n")
 
 		assert.Equal(t, "$5.00", display.currentText)
@@ -56,7 +57,7 @@ func TestSellOneItem(t *testing.T) {
 	t.Run("product not found", func(t *testing.T) {
 		display := &spyDisplay{}
 
-		sale := &Sale{display}
+		sale := &Sale{display, nil}
 		sale.OnBarcode("::no such product::\n")
 
 		assert.Equal(t, "product not found", display.currentText)
