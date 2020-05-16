@@ -17,7 +17,10 @@ func TestSellOneItem(t *testing.T) {
 	t.Run("product found", func(t *testing.T) {
 		display := &spyDisplay{}
 
-		sale := &Sale{display, nil}
+		sale := &Sale{display, map[string]string{
+			"12345": "$6.78",
+			"11223": "$5.00",
+		}}
 		sale.OnBarcode("12345\n")
 
 		assert.Equal(t, "$6.78", display.currentText)
@@ -26,7 +29,10 @@ func TestSellOneItem(t *testing.T) {
 	t.Run("another product found", func(t *testing.T) {
 		display := &spyDisplay{}
 
-		sale := &Sale{display, nil}
+		sale := &Sale{display, map[string]string{
+			"12345": "$6.78",
+			"11223": "$5.00",
+		}}
 		sale.OnBarcode("11223\n")
 
 		assert.Equal(t, "$5.00", display.currentText)
