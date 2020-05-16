@@ -41,7 +41,10 @@ func TestSellOneItem(t *testing.T) {
 	t.Run("product not found", func(t *testing.T) {
 		display := &spyDisplay{}
 
-		sale := &Sale{display, nil}
+		sale := &Sale{display, map[string]string{
+			"12345": "$6.78",
+			"11223": "$5.00",
+		}}
 		sale.OnBarcode("::no such product::\n")
 
 		assert.Equal(t, "product not found", display.currentText)
