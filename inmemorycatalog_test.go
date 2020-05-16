@@ -28,4 +28,15 @@ func TestInMemoryCatalog(t *testing.T) {
 		assert.True(t, ok, "found price")
 		assert.Equal(t, "$5.21", price)
 	})
+
+	t.Run("returns cent price if has both cent price and preformatted price", func(t *testing.T) {
+		t.Skip()
+		catalog := InMemoryCatalog{
+			formattedPricesByBarcode: map[string]string{"12345": "$1.11"},
+			pricesInCentsByBarcode:   map[string]int{"12345": 999},
+		}
+		price, ok := catalog.FormattedPrice("12345")
+		assert.True(t, ok, "found price")
+		assert.Equal(t, "$9.99", price)
+	})
 }
