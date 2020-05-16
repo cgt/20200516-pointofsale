@@ -2,6 +2,7 @@ package pointofsale
 
 import (
 	"github.com/stretchr/testify/assert"
+	"strings"
 	"testing"
 )
 
@@ -26,7 +27,7 @@ func (s *Sale) OnBarcode(barcode string) {
 		"12345\n": "$6.78",
 		"11223\n": "$5.00",
 	}
-	if price, ok := pricesByBarcode[barcode]; ok {
+	if price, ok := pricesByBarcode[strings.TrimSpace(barcode)+"\n"]; ok {
 		s.display.Display(price)
 	} else {
 		s.display.Display("product not found")
