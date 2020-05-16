@@ -28,10 +28,14 @@ func (s *Sale) OnBarcode(barcode string) {
 		"12345": "$6.78",
 		"11223": "$5.00",
 	}
-	if price, ok := pricesByBarcode[strings.TrimSpace(barcode)]; ok {
+	if price, ok := s.pricesByBarcode[strings.TrimSpace(barcode)]; ok {
 		s.display.Display(price)
 	} else {
-		s.display.Display("product not found")
+		if price, ok := pricesByBarcode[strings.TrimSpace(barcode)]; ok {
+			s.display.Display(price)
+		} else {
+			s.display.Display("product not found")
+		}
 	}
 }
 
@@ -52,6 +56,18 @@ func TestSellOneItem(t *testing.T) {
 		sale.OnBarcode("11223\n")
 
 		assert.Equal(t, "$5.00", display.currentText)
+	})
+
+	t.Run("product found in catalog", func(t *testing.T) {
+		display := &spyDisplay{}
+		catalog := map[string]string{
+			"55555": "$9.95",
+		}
+
+		sale := &Sale{display, catalog}
+		sale.OnBarcode("55555\n")
+
+		assert.Equal(t, "$9.95", display.currentText)
 	})
 
 	t.Run("product not found", func(t *testing.T) {
