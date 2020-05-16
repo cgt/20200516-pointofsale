@@ -26,12 +26,16 @@ func (s *Sale) OnBarcode(barcode string) {
 		"12345\n": "$6.78",
 		"11223\n": "$5.00",
 	}
-	if barcode == "12345\n" {
-		s.display.Display(pricesByBarcode[barcode])
-	} else if barcode == "11223\n" {
-		s.display.Display(pricesByBarcode[barcode])
+	if price, ok := pricesByBarcode[barcode]; ok {
+		s.display.Display(price)
 	} else {
-		s.display.Display("product not found")
+		if barcode == "12345\n" {
+			s.display.Display(pricesByBarcode[barcode])
+		} else if barcode == "11223\n" {
+			s.display.Display(pricesByBarcode[barcode])
+		} else {
+			s.display.Display("product not found")
+		}
 	}
 }
 
