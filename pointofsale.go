@@ -11,9 +11,8 @@ type Display interface {
 }
 
 type Sale struct {
-	display         Display
-	pricesByBarcode map[string]string
-	catalog         Catalog
+	display Display
+	catalog Catalog
 }
 
 func (s *Sale) OnBarcode(barcode string) {
