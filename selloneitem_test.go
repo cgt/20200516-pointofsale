@@ -2,5 +2,5 @@ package pointofsale
 
 import "testing"
 
-func TestNothing(t *testing.T) {
+func TestSellOneItem(t *testing.T) {
 }
