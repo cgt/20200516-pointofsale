@@ -22,7 +22,11 @@ type Sale struct {
 }
 
 func (s *Sale) OnBarcode(barcode string) {
-	s.display.Display("$6.78")
+	if barcode == "12345\n" {
+		s.display.Display("$6.78")
+	} else {
+		s.display.Display("product not found")
+	}
 }
 
 func TestSellOneItem(t *testing.T) {
@@ -33,5 +37,14 @@ func TestSellOneItem(t *testing.T) {
 		sale.OnBarcode("12345\n")
 
 		assert.Equal(t, "$6.78", display.currentText)
+	})
+
+	t.Run("product not found", func(t *testing.T) {
+		display := &spyDisplay{}
+
+		sale := &Sale{display}
+		sale.OnBarcode("::no such product::\n")
+
+		assert.Equal(t, "product not found", display.currentText)
 	})
 }
