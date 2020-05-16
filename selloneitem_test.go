@@ -13,15 +13,6 @@ func (d *spyDisplay) Display(text string) {
 	d.currentText = text
 }
 
-type InMemoryCatalog struct {
-	formattedPricesByBarcode map[string]string
-}
-
-func (s InMemoryCatalog) FormattedPrice(barcode string) (string, bool) {
-	price, ok := s.formattedPricesByBarcode[barcode]
-	return price, ok
-}
-
 func TestSellOneItem(t *testing.T) {
 	testCases := []struct {
 		description         string

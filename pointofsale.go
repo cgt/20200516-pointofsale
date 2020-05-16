@@ -27,3 +27,12 @@ func (s *Sale) OnBarcode(barcode string) {
 		s.display.Display("product not found")
 	}
 }
+
+type InMemoryCatalog struct {
+	formattedPricesByBarcode map[string]string
+}
+
+func (s InMemoryCatalog) FormattedPrice(barcode string) (string, bool) {
+	price, ok := s.formattedPricesByBarcode[barcode]
+	return price, ok
+}
