@@ -37,6 +37,11 @@ func TestSellOneItem(t *testing.T) {
 			expectedDisplayText: "$5.00",
 		},
 		{
+			description:         "product not found",
+			barcode:             "99999\n",
+			expectedDisplayText: "product not found",
+		},
+		{
 			description:         "empty barcode",
 			barcode:             "",
 			expectedDisplayText: "error: invalid barcode",
