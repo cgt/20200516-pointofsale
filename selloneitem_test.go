@@ -24,10 +24,10 @@ type Sale struct {
 
 func (s *Sale) OnBarcode(barcode string) {
 	pricesByBarcode := map[string]string{
-		"12345\n": "$6.78",
-		"11223\n": "$5.00",
+		"12345": "$6.78",
+		"11223": "$5.00",
 	}
-	if price, ok := pricesByBarcode[strings.TrimSpace(barcode)+"\n"]; ok {
+	if price, ok := pricesByBarcode[strings.TrimSpace(barcode)]; ok {
 		s.display.Display(price)
 	} else {
 		s.display.Display("product not found")
