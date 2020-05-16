@@ -49,10 +49,13 @@ func TestSellOneItem(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.description, func(t *testing.T) {
 			display := &spyDisplay{}
-			catalog := InMemoryCatalog{map[string]string{
-				"12345": "$6.78",
-				"11223": "$5.00",
-			}, nil}
+			catalog := InMemoryCatalog{
+				map[string]string{
+					"12345": "$6.78",
+					"11223": "$5.00",
+				},
+				nil,
+			}
 
 			sale := &Sale{display, catalog}
 			sale.OnBarcode(tc.barcode)
