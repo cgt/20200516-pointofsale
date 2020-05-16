@@ -38,4 +38,14 @@ func TestInMemoryCatalog(t *testing.T) {
 		assert.True(t, ok, "found price")
 		assert.Equal(t, "$9.99", price)
 	})
+
+	t.Run("formats cent prices to two decimal places", func(t *testing.T) {
+		catalog := InMemoryCatalog{
+			formattedPricesByBarcode: nil,
+			pricesInCentsByBarcode:   map[string]int{"12345": 100},
+		}
+		price, ok := catalog.FormattedPrice("12345")
+		assert.True(t, ok, "found price")
+		assert.Equal(t, "$1.00", price)
+	})
 }
