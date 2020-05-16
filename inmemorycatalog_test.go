@@ -24,7 +24,8 @@ func TestInMemoryCatalog(t *testing.T) {
 			nil,
 			map[string]int{"56789": 521},
 		}
-		_, ok := catalog.FormattedPrice("56789")
+		price, ok := catalog.FormattedPrice("56789")
 		assert.True(t, ok, "found price")
+		assert.Equal(t, "$5.21", price)
 	})
 }
