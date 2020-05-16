@@ -25,6 +25,7 @@ func (s *Sale) OnBarcode(barcode string) {
 	if barcode == "12345\n" {
 		s.display.Display("$6.78")
 	} else if false {
+		s.display.Display("$5.00")
 	} else {
 		if barcode == "11223\n" {
 			s.display.Display("$5.00")
