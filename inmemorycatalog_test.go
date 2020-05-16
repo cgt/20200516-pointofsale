@@ -11,4 +11,11 @@ func TestInMemoryCatalog(t *testing.T) {
 		_, ok := catalog.FormattedPrice("whatever")
 		assert.False(t, ok)
 	})
+
+	t.Run("look up formatted price by barcode", func(t *testing.T) {
+		catalog := InMemoryCatalog{map[string]string{"12345": "$6.78"}}
+		price, ok := catalog.FormattedPrice("12345")
+		assert.True(t, ok, "found price")
+		assert.Equal(t, "$6.78", price)
+	})
 }
