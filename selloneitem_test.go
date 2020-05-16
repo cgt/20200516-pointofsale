@@ -30,7 +30,7 @@ func TestSellOneItem(t *testing.T) {
 		display := &spyDisplay{}
 
 		sale := &Sale{display}
-		sale.OnBarcode("12345")
+		sale.OnBarcode("12345\n")
 
 		assert.Equal(t, "$6.78", display.currentText)
 	})
