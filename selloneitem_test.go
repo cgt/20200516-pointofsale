@@ -49,7 +49,7 @@ func TestSellOneItem(t *testing.T) {
 				"11223": "$5.00",
 			}
 
-			sale := &Sale{display, catalog}
+			sale := &Sale{display, catalog, nil}
 			sale.OnBarcode(tc.barcode)
 
 			assert.Equal(t, tc.expectedDisplayText, display.currentText)

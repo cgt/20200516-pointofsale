@@ -2,6 +2,10 @@ package pointofsale
 
 import "strings"
 
+type Catalog interface {
+	formattedPrice(barcode string) string
+}
+
 type Display interface {
 	Display(text string)
 }
@@ -9,6 +13,7 @@ type Display interface {
 type Sale struct {
 	display         Display
 	pricesByBarcode map[string]string
+	catalog         Catalog
 }
 
 func (s *Sale) OnBarcode(barcode string) {
