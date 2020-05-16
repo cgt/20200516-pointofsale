@@ -25,9 +25,6 @@ func (s *Sale) OnBarcode(barcode string) {
 	if price, ok := s.catalog.FormattedPrice(barcode); ok {
 		s.display.Display(price)
 	} else {
-		if false {
-		} else {
-			s.display.Display("product not found")
-		}
+		s.display.Display("product not found")
 	}
 }
