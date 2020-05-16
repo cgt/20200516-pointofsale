@@ -44,12 +44,12 @@ func TestSellOneItem(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.description, func(t *testing.T) {
 			display := &spyDisplay{}
-			catalog := map[string]string{
+			pricesByBarcode := map[string]string{
 				"12345": "$6.78",
 				"11223": "$5.00",
 			}
 
-			sale := &Sale{display, catalog, nil}
+			sale := &Sale{display, pricesByBarcode, nil}
 			sale.OnBarcode(tc.barcode)
 
 			assert.Equal(t, tc.expectedDisplayText, display.currentText)
