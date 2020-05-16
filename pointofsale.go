@@ -22,9 +22,13 @@ func (s *Sale) OnBarcode(barcode string) {
 		s.display.Display("error: invalid barcode")
 		return
 	}
-	if price, ok := s.pricesByBarcode[barcode]; ok {
-		s.display.Display(price)
+	if true {
+		if price, ok := s.pricesByBarcode[barcode]; ok {
+			s.display.Display(price)
+		} else {
+			s.display.Display("product not found")
+		}
 	} else {
-		s.display.Display("product not found")
+
 	}
 }
