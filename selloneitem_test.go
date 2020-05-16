@@ -56,11 +56,10 @@ func TestSellOneItem(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.description, func(t *testing.T) {
 			display := &spyDisplay{}
-			pricesByBarcode := map[string]string{
+			catalog := stubCatalog(map[string]string{
 				"12345": "$6.78",
 				"11223": "$5.00",
-			}
-			catalog := stubCatalog(pricesByBarcode)
+			})
 
 			sale := &Sale{display, catalog}
 			sale.OnBarcode(tc.barcode)
