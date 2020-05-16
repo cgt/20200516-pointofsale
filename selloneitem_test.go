@@ -27,10 +27,7 @@ func (s *Sale) OnBarcode(barcode string) {
 	} else if barcode == "11223\n" {
 		s.display.Display("$5.00")
 	} else {
-		if false {
-		} else {
-			s.display.Display("product not found")
-		}
+		s.display.Display("product not found")
 	}
 }
 
