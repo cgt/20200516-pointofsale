@@ -25,7 +25,11 @@ func (s *Sale) OnBarcode(barcode string) {
 	if barcode == "12345\n" {
 		s.display.Display("$6.78")
 	} else {
-		s.display.Display("product not found")
+		if barcode == "11223\n" {
+			s.display.Display("$5.00")
+		} else {
+			s.display.Display("product not found")
+		}
 	}
 }
 
@@ -37,6 +41,15 @@ func TestSellOneItem(t *testing.T) {
 		sale.OnBarcode("12345\n")
 
 		assert.Equal(t, "$6.78", display.currentText)
+	})
+
+	t.Run("another product found", func(t *testing.T) {
+		display := &spyDisplay{}
+
+		sale := &Sale{display}
+		sale.OnBarcode("11223\n")
+
+		assert.Equal(t, "$5.00", display.currentText)
 	})
 
 	t.Run("product not found", func(t *testing.T) {
