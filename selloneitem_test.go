@@ -13,6 +13,13 @@ func (d *spyDisplay) Display(text string) {
 	d.currentText = text
 }
 
+type stubCatalog map[string]string
+
+func (s stubCatalog) FormattedPrice(barcode string) (string, bool) {
+	price, ok := s[barcode]
+	return price, ok
+}
+
 func TestSellOneItem(t *testing.T) {
 	testCases := []struct {
 		description         string
@@ -49,7 +56,7 @@ func TestSellOneItem(t *testing.T) {
 				"11223": "$5.00",
 			}
 
-			sale := &Sale{display, pricesByBarcode, nil}
+			sale := &Sale{display, pricesByBarcode, stubCatalog(pricesByBarcode)}
 			sale.OnBarcode(tc.barcode)
 
 			assert.Equal(t, tc.expectedDisplayText, display.currentText)
