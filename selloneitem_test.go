@@ -13,11 +13,11 @@ func (d *spyDisplay) Display(text string) {
 	d.currentText = text
 }
 
-type stubCatalog struct {
+type InMemoryCatalog struct {
 	formattedPricesByBarcode map[string]string
 }
 
-func (s stubCatalog) FormattedPrice(barcode string) (string, bool) {
+func (s InMemoryCatalog) FormattedPrice(barcode string) (string, bool) {
 	price, ok := s.formattedPricesByBarcode[barcode]
 	return price, ok
 }
@@ -58,7 +58,7 @@ func TestSellOneItem(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.description, func(t *testing.T) {
 			display := &spyDisplay{}
-			catalog := stubCatalog{map[string]string{
+			catalog := InMemoryCatalog{map[string]string{
 				"12345": "$6.78",
 				"11223": "$5.00",
 			}}
