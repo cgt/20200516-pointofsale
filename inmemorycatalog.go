@@ -8,8 +8,7 @@ type InMemoryCatalog struct {
 
 func (s InMemoryCatalog) FormattedPrice(barcode string) (string, bool) {
 	if priceInCents, ok := s.pricesInCentsByBarcode[barcode]; ok {
-		price := formatCentPrice(priceInCents)
-		return price, true
+		return formatCentPrice(priceInCents), true
 	}
 	return "", false
 }
