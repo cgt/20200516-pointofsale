@@ -50,7 +50,6 @@ func TestSellOneItem(t *testing.T) {
 		t.Run(tc.description, func(t *testing.T) {
 			display := &spyDisplay{}
 			catalog := InMemoryCatalog{
-				nil,
 				map[string]int{
 					"12345": 678,
 					"11223": 500,
