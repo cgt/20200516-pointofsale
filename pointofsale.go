@@ -3,7 +3,7 @@ package pointofsale
 import "strings"
 
 type Catalog interface {
-	formattedPrice(barcode string) string
+	formattedPrice(barcode string) (price string, ok bool)
 }
 
 type Display interface {
