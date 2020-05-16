@@ -13,7 +13,7 @@ func (d *spyDisplay) Display(text string) {
 	d.currentText = text
 }
 
-func TestSellOneItemTable(t *testing.T) {
+func TestSellOneItem(t *testing.T) {
 	testCases := []struct {
 		description         string
 		barcode             string
