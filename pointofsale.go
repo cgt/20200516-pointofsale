@@ -35,5 +35,8 @@ type InMemoryCatalog struct {
 
 func (s InMemoryCatalog) FormattedPrice(barcode string) (string, bool) {
 	price, ok := s.formattedPricesByBarcode[barcode]
+	if !ok {
+		_, ok = s.pricesInCentsByBarcode[barcode]
+	}
 	return price, ok
 }
